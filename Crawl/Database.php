@@ -1,6 +1,6 @@
 <?php
 
-class Databases
+class Database
 {
     private $mysql_host;
     private $mysql_username;
@@ -27,7 +27,9 @@ class Databases
             echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
             echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
             return false;
+        } else {
+            mysqli_set_charset($this->mysqlConnect(), 'utf8');
+            return true;
         }
-        return true;
     }
 }

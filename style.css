@@ -5,6 +5,14 @@ select {
     outline: none;
 }
 
+input {
+    width: 250px;
+    height: 25px;
+    outline: none;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
 button {
     height: 30px;
     background: orange;
