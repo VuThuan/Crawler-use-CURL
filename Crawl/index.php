@@ -1,9 +1,11 @@
 <?php
 require_once "./Database.php";
+require_once "./AbstractCrawler.php";
+require_once "./Vnexpress.php";
+require_once "./Vietnamnet.php";
+require_once "./Dantri.php";
 require_once "./Curl.php";
 require_once "./Crawler.php";
-require_once "./InterfaceCrawler.php";
-// require_once "./Vnexpress.php";
 
 //define database
 $mysql_host = 'localhost';

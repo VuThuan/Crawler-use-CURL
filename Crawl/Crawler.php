@@ -1,8 +1,6 @@
 <?php
 
-require_once "InterfaceCrawler.php";
-
-class Crawler extends Vnexpress
+class Crawler
 {
     private $curl;
 
@@ -32,9 +30,9 @@ class Crawler extends Vnexpress
             $url_path = $url_components['path'];
         }
         //Download Page
-        echo "Downloading: $target\n";
+        // echo "Downloading: $target\n";
         $contents = $this->curl->httpRequest($target);
-        echo "Done<br>";
+        // echo "Done<br>";
         //Check Status
         if ($contents['headers']['status_info'][1] != 200) {
             //If not ok, mark as downloaded but skip
@@ -54,64 +52,52 @@ class Crawler extends Vnexpress
         $doc = new DOMDocument();
         libxml_use_internal_errors(true);
         $doc->loadHTML('<?xml encoding="utf-8" ?>' . $contents['body']);
-        //Get title
-        // $title = '';
-        // $titleTags = $doc->getElementsByTagName('title');
-        // if (count($titleTags) > 0) {
-        //     $title = mysqli_real_escape_string($mysql_conn, $titleTags[0]->nodeValue);
-        // }
-        $this->domDocument = $doc;
-        $this->connectDB = $mysql_conn;
-        $title = $this->getTitle();
+        //set Value
+        if ($url_host == 'vnexpress.net') {
+            $vnexpress = new Vnexpress();
+            $vnexpress->domDocument = $doc;
+            $vnexpress->connectDB = $mysql_conn;
+            $vnexpress->host = $url_host;
+            $vnexpress->path = $url_path;
 
-        //get Content Vnexpress
-        // $content = '';
-        // $articleTag = $doc->getElementsByTagName('article');
-        // if (count($articleTag) > 0) {
-        //     $content = mysqli_real_escape_string($mysql_conn, $articleTag[0]->nodeValue);
-        // }
-        // $contentText = str_replace('\n', '<br>', $content);
-        $contentText = $this->getContent();
+            $vnexpress->doAction();
+        } elseif ($url_host == 'dantri.com.vn') {
+            $dantri = new Dantri();
+            $dantri->domDocument = $doc;
+            $dantri->connectDB = $mysql_conn;
+            $dantri->host = $url_host;
+            $dantri->path = $url_path;
 
-        //====================get Content Vietnamnet
-        // $content = '';
-        // $articleTag = $doc->getElementById('ArticleContent');
-        // $content = mysqli_real_escape_string($mysql_conn, $articleTag->nodeValue);
-        // $contentText = str_replace('\n', '<br>', $content);
+            $dantri->doAction();
+        } elseif ($url_host == 'vietnamnet.vn') {
+            $vietnamnet = new Vietnamnet();
+            $vietnamnet->domDocument = $doc;
+            $vietnamnet->connectDB = $mysql_conn;
+            $vietnamnet->host = $url_host;
+            $vietnamnet->path = $url_path;
 
-        //====================Dan Tri
-        // $content = '';
-        // $articleTag = $doc->getElementById('ctl00_IDContent_Tin_Chi_Tiet');
-        // $content = mysqli_real_escape_string($mysql_conn, $articleTag->nodeValue);
-        // $contentText = str_replace('\n', '<br>', $content);
+            $vietnamnet->doAction();
+        } else {
+            echo "URL not crawler";
+        }
 
         //=====================get Images Vnexpress
-        $image = '';
-        $metaTags = $doc->getElementsByTagName('meta');
-        foreach ($metaTags as $tag) {
-            if ($tag->getAttribute('name') == 'twitter:image') {
-                $image = mysqli_real_escape_string($mysql_conn, $tag->getAttribute('content'));
-            }
-        }
+        //$image = '';
+        // $metaTags = $doc->getElementsByTagName('meta');
+        // foreach ($metaTags as $tag) {
+        //     if ($tag->getAttribute('name') == 'twitter:image') {
+        //         $image = mysqli_real_escape_string($mysql_conn, $tag->getAttribute('content'));
+        //     }
+        // }
 
         //get Image VietNamnet
-        // tuong tu vnexpress
 
-        //get Date
-        $date = '';
-        $headerTag = $doc->getElementsByTagName('header');
-        if (count($headerTag) > 0) {
-            $date = mysqli_real_escape_string($mysql_conn, $headerTag[2]->nodeValue);
-        }
-        $dateText = str_replace('\n', '<br>', $date);
-
-        echo  '<br><img src="' . $image . '" />> <br><h2>' . $title . '</h2><br>' . $dateText;
-        echo $contentText;
-
-        //Insert/Update Page Data
-        // $query = "INSERT IGNORE INTO pages (path, host, title, image, content, download_time) VALUES (\"" . mysqli_real_escape_string($mysql_conn, $url_path) . "\", \"$url_host \", \"$title\", \"$image\", \"$contentText\",  \"$dateText\") ON DUPLICATE KEY UPDATE host=\"$url_host \", title=\"$title\",image=\"$image\", content=\"$contentText\",  download_time=\"$dateText\"";
-        // if (!mysqli_query($mysql_conn, $query)) {
-        //     die("<br>Error: Unable to perform Insert Query\n");
+        //get Image Dan tri
+        // $metaTags = $doc->getElementsByTagName('img');
+        // foreach ($metaTags as $tag) {
+        //     if ($tag->getAttribute('class') == 'pswp-img') {
+        //         $image = mysqli_real_escape_string($mysql_conn, $tag->getAttribute('title'));
+        //     }
         // }
     }
 }
