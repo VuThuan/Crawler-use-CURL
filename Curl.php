@@ -2,18 +2,6 @@
 
 class Curl
 {
-    private $database;
-
-    function __construct(Database $databases)
-    {
-        $this->database = $databases;
-    }
-
-    function getConnectDatabase()
-    {
-        return $this->database->mysqlConnect();
-    }
-
     function httpRequest($target)
     {
         //Initialize Handle

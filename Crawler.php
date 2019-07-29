@@ -3,15 +3,22 @@
 class Crawler
 {
     private $curl;
+    private $database;
 
-    function __construct(Curl $curl)
+    function __construct(Curl $curl, Database $databases)
     {
         $this->curl = $curl;
+        $this->database = $databases;
+    }
+
+    function getConnectDatabase()
+    {
+        return $this->database->mysqlConnect();
     }
 
     function parsePage($target)
     {
-        $mysql_conn = $this->curl->getConnectDatabase();
+        $mysql_conn = $this->getConnectDatabase();
         //Parse URL and get Components
         $url_components = parse_url($target);
         if ($url_components === false) {
@@ -80,24 +87,5 @@ class Crawler
         } else {
             echo "URL not crawler";
         }
-
-        //=====================get Images Vnexpress
-        //$image = '';
-        // $metaTags = $doc->getElementsByTagName('meta');
-        // foreach ($metaTags as $tag) {
-        //     if ($tag->getAttribute('name') == 'twitter:image') {
-        //         $image = mysqli_real_escape_string($mysql_conn, $tag->getAttribute('content'));
-        //     }
-        // }
-
-        //get Image VietNamnet
-
-        //get Image Dan tri
-        // $metaTags = $doc->getElementsByTagName('img');
-        // foreach ($metaTags as $tag) {
-        //     if ($tag->getAttribute('class') == 'pswp-img') {
-        //         $image = mysqli_real_escape_string($mysql_conn, $tag->getAttribute('title'));
-        //     }
-        // }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-abstract class AbstractCrawler
+abstract class AbstractAllWebPage
 {
     private $domDocument;
     private $connectDB;

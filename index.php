@@ -1,9 +1,9 @@
 <?php
 require_once "./Database.php";
 require_once "./AbstractCrawler.php";
-require_once "./Vnexpress.php";
-require_once "./Vietnamnet.php";
-require_once "./Dantri.php";
+require_once "./WebPage/Vnexpress.php";
+require_once "./WebPage/Vietnamnet.php";
+require_once "./WebPage/Dantri.php";
 require_once "./Curl.php";
 require_once "./Crawler.php";
 
@@ -21,7 +21,7 @@ $mysql_database = 'phpCrawler';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Crawler</title>
-    <link rel="stylesheet" type="text/css" href="/../style.css" />
+    <link rel="stylesheet" type="text/css" href="asset/css/style.css" />
 </head>
 
 <body>
@@ -36,8 +36,8 @@ $mysql_database = 'phpCrawler';
         $urlPages = $_POST['urlPages'];
         $mysql_conn = new Database($mysql_host, $mysql_username, $mysql_password, $mysql_database);
         if (!$mysql_conn->isConnectDatabase()) return;
-        $curl = new Curl($mysql_conn);
-        (new Crawler($curl))->parsePage($urlPages);
+        $curl = new Curl();
+        (new Crawler($curl, $mysql_conn))->parsePage($urlPages);
     }
     ?>
 </body>

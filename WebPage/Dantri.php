@@ -1,5 +1,5 @@
 <?php
-class Dantri extends AbstractCrawler
+class Dantri extends AbstractAllWebPage
 {
     public function getTitle()
     {

@@ -1,5 +1,5 @@
 <?php
-class Vietnamnet extends AbstractCrawler
+class Vietnamnet extends AbstractAllWebPage
 {
     public function getTitle()
     {
