@@ -49,12 +49,8 @@ class Crawler
             }
             return false;
         }
-        $this->parseContentBody($contents, $url_path, $url_host, $mysql_conn);
-        return true;
-    }
 
-    function parseContentBody($contents, $url_path, $url_host, $mysql_conn)
-    {
+
         //Parse Contents
         $doc = new DOMDocument();
         libxml_use_internal_errors(true);
@@ -87,5 +83,8 @@ class Crawler
         } else {
             echo "URL not crawler";
         }
+
+
+        return true;
     }
 }

@@ -1,15 +1,6 @@
 <?php
 class Vietnamnet extends Vnexpress
 {
-    // public function getTitle()
-    // {
-    //     $title = '';
-    //     $titleTags = $this->domDocument->getElementsByTagName('title');
-    //     if (count($titleTags) > 0) {
-    //         $title = mysqli_real_escape_string($this->connectDB, $titleTags[0]->nodeValue);
-    //     }
-    //     return $title;
-    // }
     public function getDate()
     {
         $date = '';
@@ -42,21 +33,4 @@ class Vietnamnet extends Vnexpress
         }
         return $image;
     }
-    // public function doAction()
-    // {
-    //     $url_host = $this->host;
-    //     $url_path = $this->path;
-    //     if ($url_host == 'vietnamnet.vn') {
-    //         $title = $this->getTitle();
-    //         $dateText = $this->getDate();
-    //         $image = $this->getImage();
-    //         $contentText = $this->getContent();
-    //         echo '<h1> "' . $title . '"</h1> <br> "' . $dateText . '" <br> <img src="' . $image . '"> <br> "' . $contentText . '"';
-    //         //Insert/Update Page Data
-    //         $query = "INSERT IGNORE INTO pages (path, host, title, image, content, download_time) VALUES (\"" . mysqli_real_escape_string($this->connectDB, $url_path) . "\", \"$url_host \", \"$title\", \"$image\", \"$contentText\",  \"$dateText\") ON DUPLICATE KEY UPDATE host=\"$url_host \", title=\"$title\",image=\"$image\", content=\"$contentText\",  download_time=\"$dateText\"";
-    //         if (!mysqli_query($this->connectDB, $query)) {
-    //             die("<br>Error: Unable to perform Insert Query\n");
-    //         }
-    //     }
-    // }
 }
