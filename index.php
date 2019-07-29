@@ -1,6 +1,6 @@
 <?php
 require_once "./Database.php";
-require_once "./AbstractCrawler.php";
+require_once "./AbstractAllWebPage.php";
 require_once "./WebPage/Vnexpress.php";
 require_once "./WebPage/Vietnamnet.php";
 require_once "./WebPage/Dantri.php";
