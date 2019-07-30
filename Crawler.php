@@ -4,11 +4,13 @@ class Crawler
 {
     private $curl;
     private $database;
+    private $webPage;
 
-    function __construct(Curl $curl, Database $databases)
+    function __construct(Curl $curl, Database $databases, $webPages)
     {
         $this->curl = $curl;
         $this->database = $databases;
+        $this->webPage = $webPages;
     }
 
     function getConnectDatabase()
@@ -55,35 +57,19 @@ class Crawler
         $doc = new DOMDocument();
         libxml_use_internal_errors(true);
         $doc->loadHTML('<?xml encoding="utf-8" ?>' . $contents['body']);
-        //set Value
-        if ($url_host == 'vnexpress.net') {
-            $vnexpress = new Vnexpress();
-            $vnexpress->domDocument = $doc;
-            $vnexpress->connectDB = $mysql_conn;
-            $vnexpress->host = $url_host;
-            $vnexpress->path = $url_path;
+        //set Value for Pages
+        $pages = $this->webPage;
+        $hostName = explode(".", $url_host);
+        foreach ($pages as $key => $value) {
+            if ($key == $hostName[0]) {
+                $value->domDocument = $doc;
+                $value->connectDB = $mysql_conn;
+                $value->host = $url_host;
+                $value->path = $url_path;
 
-            $vnexpress->doAction();
-        } elseif ($url_host == 'dantri.com.vn') {
-            $dantri = new Dantri();
-            $dantri->domDocument = $doc;
-            $dantri->connectDB = $mysql_conn;
-            $dantri->host = $url_host;
-            $dantri->path = $url_path;
-
-            $dantri->doAction();
-        } elseif ($url_host == 'vietnamnet.vn') {
-            $vietnamnet = new Vietnamnet();
-            $vietnamnet->domDocument = $doc;
-            $vietnamnet->connectDB = $mysql_conn;
-            $vietnamnet->host = $url_host;
-            $vietnamnet->path = $url_path;
-
-            $vietnamnet->doAction();
-        } else {
-            echo "URL not crawler";
+                $value->doAction();
+            }
         }
-
 
         return true;
     }

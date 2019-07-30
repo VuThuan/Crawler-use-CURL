@@ -36,8 +36,15 @@ $mysql_database = 'phpCrawler';
         $urlPages = $_POST['urlPages'];
         $mysql_conn = new Database($mysql_host, $mysql_username, $mysql_password, $mysql_database);
         if (!$mysql_conn->isConnectDatabase()) return;
+
         $curl = new Curl();
-        (new Crawler($curl, $mysql_conn))->parsePage($urlPages);
+        $arr = array(
+            "vnexpress" => new Vnexpress(),
+            "vietnamnet" => new Vietnamnet(),
+            "dantri" => new Dantri()
+        );
+
+        (new Crawler($curl, $mysql_conn, $arr))->parsePage($urlPages);
     }
     ?>
 </body>
