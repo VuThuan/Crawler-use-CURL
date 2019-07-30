@@ -1,5 +1,5 @@
 <?php
-class Vietnamnet extends Vnexpress
+class VietnamnetController extends VnexpressController
 {
     public function getDate()
     {

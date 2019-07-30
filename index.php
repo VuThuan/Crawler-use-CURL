@@ -38,13 +38,13 @@ $mysql_database = 'phpCrawler';
         if (!$mysql_conn->isConnectDatabase()) return;
 
         $curl = new Curl();
-        $arr = array(
-            "vnexpress" => new Vnexpress(),
-            "vietnamnet" => new Vietnamnet(),
-            "dantri" => new Dantri()
+        $rows = array(
+            "vnexpress" => new VnexpressController(),
+            "vietnamnet" => new VietnamnetController(),
+            "dantri" => new DantriController()
         );
 
-        (new Crawler($curl, $mysql_conn, $arr))->parsePage($urlPages);
+        (new Crawler($curl, $mysql_conn, $rows))->parsePage($urlPages);
     }
     ?>
 </body>

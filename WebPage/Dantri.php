@@ -1,5 +1,5 @@
 <?php
-class Dantri extends Vnexpress
+class DantriController extends VnexpressController
 {
     public function getDate()
     {

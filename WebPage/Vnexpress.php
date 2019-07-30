@@ -1,6 +1,6 @@
 <?php
 
-class Vnexpress extends AbstractAllWebPage
+class VnexpressController extends AbstractAllWebPage
 {
     public function getTitle()
     {
