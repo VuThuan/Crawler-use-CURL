@@ -44,7 +44,7 @@ class Crawler
         //Check Status of Request 
         if ($contents['headers']['status_info'][1] != 200) {
             //If not ok, mark as downloaded but skip
-            $query = "INSERT INTO pages (path) VALUES (\"" . mysqli_real_escape_string($mysql_conn, $url_path) . "\",)";
+            $query = "INSERT INTO pages (path) VALUES (\"" . mysqli_real_escape_string($mysql_conn, $url_path) . "\")";
             if (!mysqli_query($mysql_conn, $query)) {
                 die("Error: Unable to perform Update Query (http status)\n");
             }
