@@ -1,24 +1,21 @@
 <?php
 class DantriController extends VnexpressController
 {
-    public function getDate()
+    function getDate()
     {
-        $date = '';
-        $para = $this->domDocument->getElementsByTagName('span');
-        foreach ($para as $p) {
-            if ($p->getAttribute('class') == 'fr fon7 mr2 tt-capitalize') {
-                $date = mysqli_real_escape_string($this->connectDB, $p->nodeValue);
-            }
-        }
-        $dateText = str_replace('\n', '<br>', $date);
-        return $dateText;
+        preg_match("/<span class=\"fr fon7 mr2 tt-capitalize\">(\n|\r)\s+(.*?)(\n|\r)\s+<\/span>/", $this->html, $date);
+        return $date[0];
     }
-    public function getContent()
+    function getContent()
     {
-        $content = '';
-        $articleTag = $this->domDocument->getElementById('divNewsContent');
-        $content = mysqli_real_escape_string($this->connectDB, $articleTag->nodeValue);
-        $contentText = str_replace('\n', '<br>', $content);
-        return $contentText;
+        preg_match_all("/<div id=\"divNewsContent\" class=\"fon34 mt3 mr2 fon43 detail-content\">(.*?)<div id=\"div_tamlongnhanai\"><\/div>/s", $this->html, $matches, PREG_SET_ORDER, 1);
+
+        preg_match_all("/<p>(.*?)<\/p>/s", $matches[0][1], $content, PREG_SET_ORDER, 1);
+
+        $output = '';
+        foreach ($content as $para) {
+            $output .= $para[0];
+        }
+        return $output;
     }
 }

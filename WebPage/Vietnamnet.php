@@ -3,34 +3,24 @@ class VietnamnetController extends VnexpressController
 {
     public function getDate()
     {
-        $date = '';
-        $para = $this->domDocument->getElementsByTagName('p');
-        foreach ($para as $p) {
-            if ($p->getAttribute('class') == 'time-zone') {
-                $date = mysqli_real_escape_string($this->connectDB, $p->nodeValue);
-            }
-        }
-        $dateText = str_replace('\n', '<br>', $date);
-        return $dateText;
-    }
-
-    public function getContent()
-    {
-        $content = '';
-        $articleTag = $this->domDocument->getElementById('ArticleContent');
-        $content = mysqli_real_escape_string($this->connectDB, $articleTag->nodeValue);
-        $contentText = str_replace('\n', '<br>', $content);
-        return $contentText;
+        preg_match("/<p class=\"time-zone\">(.*?)+(\n|\r)\s+<\/p>/", $this->html, $date);
+        return $date[0];
     }
     public function getImage()
     {
-        $image = '';
-        $metaTags = $this->domDocument->getElementsByTagName('meta');
-        foreach ($metaTags as $tag) {
-            if ($tag->getAttribute('property') == 'og:image') {
-                $image = mysqli_real_escape_string($this->connectDB, $tag->getAttribute('content'));
-            }
+        preg_match_all("/<meta property=\"og:image\" content=\"(.*?)\" \/>/s", $this->html, $image, PREG_SET_ORDER, 0);
+        return $image[0][1];
+    }
+    function getContent()
+    {
+        preg_match_all("/<div id=\"ArticleContent\" class=\"ArticleContent\">(.*?)<div class=\"inner-article\">/s", $this->html, $matches, PREG_SET_ORDER, 1);
+
+        preg_match_all("/<p>(.*?)<\/p>/s", $matches[0][1], $content, PREG_SET_ORDER, 1);
+
+        $output = '';
+        foreach ($content as $para) {
+            $output .= $para[0];
         }
-        return $image;
+        return $output;
     }
 }

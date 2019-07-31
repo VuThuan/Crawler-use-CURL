@@ -2,7 +2,7 @@
 
 abstract class AbstractAllWebPage
 {
-    private $domDocument;
+    private $html;
     private $connectDB;
     private $host;
     private $path;
@@ -11,5 +11,5 @@ abstract class AbstractAllWebPage
     abstract public function getDate();
     abstract public function getContent();
     abstract public function getImage();
-    abstract public function actionForWebsite();
+    abstract public function doAction();
 }

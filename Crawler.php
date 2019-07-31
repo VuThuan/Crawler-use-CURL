@@ -52,22 +52,17 @@ class Crawler
         }
 
         //Parse Contents
-        $doc = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $doc->loadHTML('<?xml encoding="utf-8" ?>' . $contents['body']);
-
         $pages = $this->allWebPages;
-        $hostName = explode(".", $url_host);
 
         //set Value for Pages
         foreach ($pages as $key => $page) {
-            if ($key == $hostName[0]) {
-                $page->domDocument = $doc;
+            if (preg_match("/$key/", $url_host)) {
+                $page->html = $contents['body'];
                 $page->connectDB = $mysql_conn;
                 $page->host = $url_host;
                 $page->path = $url_path;
 
-                $page->actionForWebsite();
+                $page->doAction();
             }
         }
 
