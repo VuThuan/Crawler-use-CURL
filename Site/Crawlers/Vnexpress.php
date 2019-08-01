@@ -1,17 +1,38 @@
 <?php
 
-class VnexpressController extends AbstractAllWebPage
+class VnexpressCrawler extends AbstractCrawler
 {
+    public function matchesImage($regex)
+    {
+        preg_match($regex, $this->html, $image);
+        return $image[1];
+    }
+    public function matchesDate($regex, $key)
+    {
+        preg_match($regex, $this->html, $date);
+        return $date[$key];
+    }
+    public function matchesContent($regexParent, $regexChild)
+    {
+        preg_match_all($regexParent, $this->html, $matches, PREG_SET_ORDER, 1);
+
+        preg_match_all($regexChild, $matches[0][1], $content, PREG_SET_ORDER, 1);
+
+        $output = '';
+        foreach ($content as $para) {
+            $output .= $para[0];
+        }
+        return $output;
+    }
+
     public function getTitle()
     {
         preg_match("/<title>(.*?)<\/title>/", $this->html, $title);
-
         return $title[1];
     }
     public function getDate()
     {
-        preg_match("/<span+\s+class=\"time\sleft\">(.*?)<\/span>/", $this->html, $date);
-        return $date[1];
+        return $this->matchesDate("/<span+\s+class=\"time\sleft\">(.*?)<\/span>/", 1);
     }
     public function getContent()
     {
@@ -22,13 +43,13 @@ class VnexpressController extends AbstractAllWebPage
         }
         return $output;
     }
+
     public function getImage()
     {
-        preg_match("/<meta name=\"twitter:image\" content=\"(.*?)\"(\/)?>/", $this->html, $image);
-        return $image[1];
+        return $this->matchesImage("/<meta name=\"twitter:image\" content=\"(.*?)\"(\/)?>/");
     }
 
-    public function doAction()
+    public function doActionforWebsite()
     {
         $url_host = $this->host;
         $url_path = $this->path;

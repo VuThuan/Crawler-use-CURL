@@ -1,6 +1,6 @@
 <?php
 
-abstract class AbstractAllWebPage
+abstract class AbstractCrawler
 {
     private $html;
     private $connectDB;
@@ -11,5 +11,5 @@ abstract class AbstractAllWebPage
     abstract public function getDate();
     abstract public function getContent();
     abstract public function getImage();
-    abstract public function doAction();
+    abstract public function doActionforWebsite();
 }

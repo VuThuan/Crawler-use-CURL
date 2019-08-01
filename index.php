@@ -1,11 +1,11 @@
 <?php
-require_once "./Database.php";
-require_once "./AbstractAllWebPage.php";
-require_once "./WebPage/Vnexpress.php";
-require_once "./WebPage/Vietnamnet.php";
-require_once "./WebPage/Dantri.php";
-require_once "./Curl.php";
-require_once "./Crawler.php";
+require_once "./System/core/Database.php";
+require_once "./Site/AbstractCrawler.php";
+require_once "./Site/Crawlers/Vnexpress.php";
+require_once "./Site/Crawlers/Vietnamnet.php";
+require_once "./Site/Crawlers/Dantri.php";
+require_once "./System/library/Curl.php";
+require_once "./System/core/Crawler.php";
 
 //define database
 $mysql_host = 'localhost';
@@ -21,7 +21,7 @@ $mysql_database = 'phpCrawler';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Crawler</title>
-    <link rel="stylesheet" type="text/css" href="asset/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/style.css" />
 </head>
 
 <body>
@@ -39,9 +39,9 @@ $mysql_database = 'phpCrawler';
 
         $curl = new Curl();
         $rows = array(
-            "vnexpress" => new VnexpressController(),
-            "vietnamnet" => new VietnamnetController(),
-            "dantri" => new DantriController()
+            "vnexpress" => new VnexpressCrawler(),
+            "vietnamnet" => new VietnamnetCrawler(),
+            "dantri" => new DantriCrawler()
         );
 
         (new Crawler($curl, $mysql_conn, $rows))->parsePage($urlPages);
