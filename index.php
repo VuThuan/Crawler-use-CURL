@@ -1,5 +1,6 @@
 <?php
 require_once "./System/core/Database.php";
+require_once "./Site/Functions/FunctionGetData.php";
 require_once "./Site/AbstractCrawler.php";
 require_once "./Site/Crawlers/Vnexpress.php";
 require_once "./Site/Crawlers/Vietnamnet.php";
@@ -34,6 +35,9 @@ $mysql_database = 'phpCrawler';
     <?php
     if (isset($_POST['submit'])) {
         $urlPages = $_POST['urlPages'];
+        if (empty($urlPages)) {
+            die("Error: Please Enter the Website URL<br> ");
+        }
         $mysql_conn = new Database($mysql_host, $mysql_username, $mysql_password, $mysql_database);
         if (!$mysql_conn->isConnectDatabase()) return;
 
