@@ -11,7 +11,8 @@ abstract class AbstractCrawler
     abstract public function getDate();
     abstract public function getContent();
     abstract public function getImage();
-    public function doActionRetriveData()
+
+    public function saveData()
     {
         $url_host = $this->host;
         $url_path = mysqli_real_escape_string($this->connectDB, $this->path);
