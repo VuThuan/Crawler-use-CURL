@@ -1,18 +1,14 @@
 <?php
-require_once "./System/core/Database.php";
-require_once "./Site/Functions/FunctionGetData.php";
-require_once "./Site/AbstractCrawler.php";
-require_once "./Site/Crawlers/Vnexpress.php";
-require_once "./Site/Crawlers/Vietnamnet.php";
-require_once "./Site/Crawlers/Dantri.php";
-require_once "./System/library/Curl.php";
-require_once "./System/core/Crawler.php";
+require_once "./Application/lib/Database.php";
+require_once "./Application/config/config.php";
+require_once "./Application/Site/Functions/FunctionGetData.php";
+require_once "./Application/Site/AbstractCrawler.php";
+require_once "./Application/Site/Crawlers/Vnexpress.php";
+require_once "./Application/Site/Crawlers/Vietnamnet.php";
+require_once "./Application/Site/Crawlers/Dantri.php";
+require_once "./Application/core/Curl.php";
+require_once "./Application/core/Crawler.php";
 
-//define database
-$mysql_host = 'localhost';
-$mysql_username = 'root';
-$mysql_password = '';
-$mysql_database = 'phpCrawler';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +34,7 @@ $mysql_database = 'phpCrawler';
         if (empty($urlPages)) {
             die("Error: Please Enter the Website URL<br> ");
         }
-        $mysql_conn = new Database($mysql_host, $mysql_username, $mysql_password, $mysql_database);
+        $mysql_conn = new Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         if (!$mysql_conn->isConnectDatabase()) return;
 
         $curl = new Curl();
