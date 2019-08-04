@@ -15,16 +15,16 @@ abstract class AbstractCrawler
     public function saveData()
     {
         $url_host = $this->host;
-        $url_path = mysqli_real_escape_string($this->connectDB, $this->path);
-        $title = mysqli_real_escape_string($this->connectDB, $this->getTitle());
-        $date = mysqli_real_escape_string($this->connectDB, $this->getDate());
+        $url_path = $this->path;
+        $title = $this->getTitle();
+        $date = $this->getDate();
         $image = $this->getImage();
-        $content = mysqli_real_escape_string($this->connectDB, $this->getContent());
+        $content = $this->getContent();
 
         echo '<h2> ' . $title . '</h2> ' . $date . ' <br><img src=' . $image . '><br>' . $content;
 
         // Insert/Update Page Data
-        $query = "INSERT IGNORE INTO pages (path, host, title, image, content, download_time) VALUES (\"$url_path\", \"$url_host \", \"$title\", \"$image\", \"$content\",  \"$date\")";
+        $query = "INSERT IGNORE INTO pages (path, host, title, image, content, download_time) VALUES (\"" . mysqli_real_escape_string($this->connectDB, $url_path) . "\", \"$url_host \", \"" . mysqli_real_escape_string($this->connectDB, $title) . "\", \"$image\", \"" . mysqli_real_escape_string($this->connectDB, $content) . "\",  \"" . mysqli_real_escape_string($this->connectDB, $date) . "\")";
         if (!mysqli_query($this->connectDB, $query)) {
             die("<br>Error: Unable to perform Insert Query<br>");
         }
