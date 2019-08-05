@@ -1,25 +1,23 @@
 <?php
 
-abstract class AbstractCrawler
+abstract class PagesFactory
 {
-    private $html;
+    public $html;
     public $connectDB;
     public $host;
     public $path;
 
-    abstract public function getTitle();
-    abstract public function getDate();
-    abstract public function getContent();
-    abstract public function getImage();
+    abstract function makePages(): InterfaceGetData;
 
-    public function saveData()
+    public function takeDataForPage()
     {
+        $page = $this->makePages();
         $url_host = $this->host;
         $url_path = $this->path;
-        $title = $this->getTitle();
-        $date = $this->getDate();
-        $image = $this->getImage();
-        $content = $this->getContent();
+        $title = $page->getTitle();
+        $content = $page->getContent();
+        $date = $page->getDate();
+        $image = $page->getImage();
 
         echo '<h2> ' . $title . '</h2> ' . $date . ' <br><img src=' . $image . '><br>' . $content;
 

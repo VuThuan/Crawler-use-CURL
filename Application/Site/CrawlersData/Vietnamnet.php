@@ -1,6 +1,19 @@
 <?php
-class VietnamnetCrawler extends VnexpressCrawler
+class Vietnamnet implements InterfaceGetData
 {
+    private $html;
+
+    public function __construct($html)
+    {
+        $this->html = $html;
+    }
+
+    public function getTitle()
+    {
+        preg_match("/<title>(.*?)<\/title>/", $this->html, $title);
+        return $title[1];
+    }
+
     public function getDate()
     {
         return matchesDate("/<p class=\"time-zone\">(.*?)+(\n|\r)\s+<\/p>/", 0, $this->html);

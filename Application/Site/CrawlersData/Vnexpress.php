@@ -1,7 +1,14 @@
 <?php
 
-class VnexpressCrawler extends AbstractCrawler
+class Vnexpress implements InterfaceGetData
 {
+    private $html;
+
+    public function __construct($html)
+    {
+        $this->html = $html;
+    }
+
     public function getTitle()
     {
         preg_match("/<title>(.*?)<\/title>/", $this->html, $title);
