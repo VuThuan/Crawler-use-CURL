@@ -1,6 +1,6 @@
 <?php
 
-class VnexpressFactory extends PagesFactory
+class VnexpressData extends PagesFactory
 {
     public function makePages(): InterfaceGetData
     {

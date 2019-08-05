@@ -3,13 +3,13 @@ require_once "./Application/lib/Database.php";
 require_once "./Application/config/config.php";
 require_once "./Application/Site/Functions/FunctionGetData.php";
 require_once "./Application/Site/InterfaceGetData.php";
-require_once "./Application/Site/CrawlersData/Vnexpress.php";
-require_once "./Application/Site/CrawlersData/Vietnamnet.php";
-require_once "./Application/Site/CrawlersData/Dantri.php";
+require_once "./Application/Site/DataOfPages/Vnexpress.php";
+require_once "./Application/Site/DataOfPages/Vietnamnet.php";
+require_once "./Application/Site/DataOfPages/Dantri.php";
 require_once "./Application/Site/PagesFactory.php";
-require_once "./Application/Site/FactoryWebPages/VnexpressFactory.php";
-require_once "./Application/Site/FactoryWebPages/VietnamnetFactory.php";
-require_once "./Application/Site/FactoryWebPages/DantriFactory.php";
+require_once "./Application/Site/Pages/VnexpressData.php";
+require_once "./Application/Site/Pages/VietnamnetData.php";
+require_once "./Application/Site/Pages/DantriData.php";
 require_once "./Application/core/Curl.php";
 require_once "./Application/core/Crawler.php";
 
@@ -43,9 +43,9 @@ require_once "./Application/core/Crawler.php";
 
         $curl = new Curl();
         $rows = array(
-            "vnexpress" => new VnexpressFactory(),
-            "vietnamnet" => new VietnamnetFactory(),
-            "dantri" => new DantriFactory()
+            "vnexpress" => new VnexpressData(),
+            "vietnamnet" => new VietnamnetData(),
+            "dantri" => new DantriData()
         );
 
         (new Crawler($curl, $mysql_conn, $rows))->parsePage($urlPages);

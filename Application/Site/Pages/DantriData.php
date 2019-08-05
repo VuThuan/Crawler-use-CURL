@@ -1,6 +1,6 @@
 <?php
 
-class DantriFactory extends PagesFactory
+class DantriData extends PagesFactory
 {
     public function makePages(): InterfaceGetData
     {

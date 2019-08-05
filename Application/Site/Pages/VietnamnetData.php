@@ -1,6 +1,6 @@
 <?php
 
-class VietnamnetFactory extends PagesFactory
+class VietnamnetData extends PagesFactory
 {
     public function makePages(): InterfaceGetData
     {
