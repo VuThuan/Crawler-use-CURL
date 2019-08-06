@@ -2,7 +2,7 @@
 
 class DantriData extends PagesFactory
 {
-    public function makePages(): InterfaceGetData
+    public function creatWebsite(): InterfaceGetData
     {
         return new Dantri($this->html);
     }

@@ -52,7 +52,7 @@ class Crawler
                 $page->host = $url_host;
                 $page->path = $url_path;
 
-                $page->takeDataForPage();
+                echo $page->takeDataForWebsite();
             }
         }
 

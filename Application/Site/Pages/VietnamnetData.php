@@ -2,7 +2,7 @@
 
 class VietnamnetData extends PagesFactory
 {
-    public function makePages(): InterfaceGetData
+    public function creatWebsite(): InterfaceGetData
     {
         return new Vietnamnet($this->html);
     }
