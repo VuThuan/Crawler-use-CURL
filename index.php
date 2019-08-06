@@ -49,7 +49,6 @@ require_once "./Application/core/Crawler.php";
         );
 
         (new Crawler($curl, $mysql_conn, $rows))->parsePage($urlPages);
-        $page->takeDataForWebsite();
     }
     ?>
 </body>
