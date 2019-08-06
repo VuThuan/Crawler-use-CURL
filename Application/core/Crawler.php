@@ -4,13 +4,13 @@ class Crawler
 {
     private $curl;
     private $database;
-    private $allWebPages;
+    // private $allWebPages;
 
-    function __construct(Curl $curl, Database $databases, $webPages)
+    function __construct(Curl $curl, Database $databases) //, $webPages
     {
         $this->curl = $curl;
         $this->database = $databases;
-        $this->allWebPages = $webPages;
+        // $this->allWebPages = $webPages;
     }
 
     //We parse the URL and download if the status is 200, then we set the value and get the data, insert to database
@@ -44,18 +44,11 @@ class Crawler
             return false;
         }
 
-        $pages = $this->allWebPages;
-        foreach ($pages as $key => $page) {
-            if (preg_match("/$key/", $url_host)) {
-                $page->html = $contents['body'];
-                $page->connectDB = $mysql_conn;
-                $page->host = $url_host;
-                $page->path = $url_path;
-
-                echo $page->takeDataForWebsite();
-            }
-        }
-
-        return true;
+        return array(
+            "host" => $url_host,
+            "path" => $url_path,
+            "html" => $contents['body'],
+            "connectDB" => $mysql_conn
+        );
     }
 }
