@@ -8,9 +8,6 @@ require_once "./Application/Site/DataOfPages/Vnexpress.php";
 require_once "./Application/Site/DataOfPages/Vietnamnet.php";
 require_once "./Application/Site/DataOfPages/Dantri.php";
 require_once "./Application/Site/PagesFactory.php";
-require_once "./Application/Site/Pages/VnexpressData.php";
-require_once "./Application/Site/Pages/VietnamnetData.php";
-require_once "./Application/Site/Pages/DantriData.php";
 require_once "./Application/core/Curl.php";
 require_once "./Application/core/Crawler.php";
 
@@ -45,23 +42,8 @@ require_once "./Application/core/Crawler.php";
         $curl = new Curl();
         $dataPage = (new Crawler($curl, $mysql_conn))->parsePage($urlPages);
 
-        $factoryMethodIntance = NULL;
-        switch (true) {
-            case preg_match('/vnexpress/', $dataPage['host']):
-                $factoryMethodIntance = new VnexpressData();
-                break;
-            case preg_match('/vietnamnet/', $dataPage['host']):
-                $factoryMethodIntance = new VietnamnetData();
-                break;
-            case preg_match('/dantri/', $dataPage['host']):
-                $factoryMethodIntance = new DantriData();
-                break;
-            default:
-                die("URL khong hop le");
-                break;
-        }
-
-        (new TestFactoryMethod($dataPage, $factoryMethodIntance))->createFactory();
+        $factory = new PagesFactory();
+        (new TestFactoryMethod($dataPage, $factory))->createFactory();
     }
     ?>
 </body>

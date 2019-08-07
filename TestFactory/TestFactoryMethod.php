@@ -4,7 +4,7 @@ class TestFactoryMethod
 {
     private $dataPage;
 
-    public function __construct($dataPage, PagesFactory $page)
+    public function __construct($dataPage, $page)
     {
         $this->dataPage = $dataPage;
         $this->page = $page;
