@@ -1,8 +1,8 @@
 <?php
 require_once "./Application/lib/Database.php";
 require_once "./Application/config/config.php";
-require_once "./Functions/FunctionGetData.php";
-require_once "./Functions/FunctionCreateFactory.php";
+require_once "./Application/Site/Functions/FunctionGetData.php";
+require_once "./TestFactory/TestFactoryMethod.php";
 require_once "./Application/Site/InterfaceGetData.php";
 require_once "./Application/Site/DataOfPages/Vnexpress.php";
 require_once "./Application/Site/DataOfPages/Vietnamnet.php";
@@ -43,17 +43,10 @@ require_once "./Application/core/Crawler.php";
         if (!$mysql_conn->isConnectDatabase()) return;
 
         $curl = new Curl();
+        $dataPage = (new Crawler($curl, $mysql_conn))->parsePage($urlPages);
 
-        $dataPage = (new Crawler($curl, $mysql_conn))->parsePage($urlPages); //, $rows
-
-        // $rows = array(
-        //     "vnexpress" => new VnexpressData(),
-        //     "vietnamnet" => new VietnamnetData(),
-        //     "dantri" => new DantriData()
-        // );
-        createFactory($dataPage, new VnexpressData);
-        createFactory($dataPage, new VietnamnetData);
-        createFactory($dataPage, new DantriData);
+        $factoryMethodIntance  = new VnexpressData();
+        (new TestFactoryMethod($dataPage, $factoryMethodIntance))->createFactory();
     }
     ?>
 </body>
