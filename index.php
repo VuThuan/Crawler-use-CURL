@@ -45,7 +45,22 @@ require_once "./Application/core/Crawler.php";
         $curl = new Curl();
         $dataPage = (new Crawler($curl, $mysql_conn))->parsePage($urlPages);
 
-        $factoryMethodIntance  = new VnexpressData();
+        $factoryMethodIntance = NULL;
+        switch (true) {
+            case preg_match('/vnexpress/', $dataPage['host']):
+                $factoryMethodIntance = new VnexpressData();
+                break;
+            case preg_match('/vietnamnet/', $dataPage['host']):
+                $factoryMethodIntance = new VietnamnetData();
+                break;
+            case preg_match('/dantri/', $dataPage['host']):
+                $factoryMethodIntance = new DantriData();
+                break;
+            default:
+                die("URL khong hop le");
+                break;
+        }
+
         (new TestFactoryMethod($dataPage, $factoryMethodIntance))->createFactory();
     }
     ?>
