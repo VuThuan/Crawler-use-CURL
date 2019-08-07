@@ -2,8 +2,17 @@
 
 class DantriData extends PagesFactory
 {
-    public function creatWebsite(): InterfaceGetData
+    public function makeWebsite($param): InterfaceGetData
     {
-        return new Dantri($this->html);
+        $page = NULL;
+        switch ($param) {
+            case 'dantri':
+                $page = new Dantri($this->html);
+                break;
+            default:
+                $page = NULL;
+                break;
+        }
+        return $page;
     }
 }

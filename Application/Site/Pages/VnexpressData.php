@@ -2,8 +2,17 @@
 
 class VnexpressData extends PagesFactory
 {
-    public function creatWebsite(): InterfaceGetData
+    public function makeWebsite($param): InterfaceGetData
     {
-        return new Vnexpress($this->html);
+        $page = NULL;
+        switch ($param) {
+            case 'vnexpress':
+                $page =  new Vnexpress($this->html);
+                break;
+            default:
+                $page = NULL;
+                break;
+        }
+        return $page;
     }
 }
