@@ -2,11 +2,11 @@
 require_once "./Application/lib/Database.php";
 require_once "./Application/config/config.php";
 require_once "./Application/Site/Functions/FunctionGetData.php";
-require_once "./TestFactory/TestFactoryMethod.php";
+require_once "./Tests/FactoryMethodCrawler.php";
 require_once "./Application/Site/InterfaceGetData.php";
-require_once "./Application/Site/DataOfPages/Vnexpress.php";
-require_once "./Application/Site/DataOfPages/Vietnamnet.php";
-require_once "./Application/Site/DataOfPages/Dantri.php";
+require_once "./Application/Site/PageCrawler/Vnexpress.php";
+require_once "./Application/Site/PageCrawler/Vietnamnet.php";
+require_once "./Application/Site/PageCrawler/Dantri.php";
 require_once "./Application/Site/PagesFactory.php";
 require_once "./Application/core/Curl.php";
 require_once "./Application/core/Crawler.php";
@@ -40,10 +40,13 @@ require_once "./Application/core/Crawler.php";
         if (!$mysql_conn->isConnectDatabase()) return;
 
         $curl = new Curl();
-        $dataPage = (new Crawler($curl, $mysql_conn))->parsePage($urlPages);
+        $crawler = new Crawler($curl, $mysql_conn);
+        $dataParse = $crawler->parsePage($urlPages);
 
         $factory = new PagesFactory();
-        (new TestFactoryMethod($dataPage, $factory))->createFactory();
+        $factoryCrawler = new FactoryMethodCrawler($dataParse, $factory);
+
+        $factoryCrawler->getFactory();
     }
     ?>
 </body>

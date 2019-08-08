@@ -1,6 +1,6 @@
 <?php
 
-class TestFactoryMethod
+class FactoryMethodCrawler
 {
     private $dataPage;
 
@@ -10,7 +10,7 @@ class TestFactoryMethod
         $this->page = $page;
     }
 
-    function createFactory()
+    function getFactory()
     {
         $dataPage = $this->dataPage;
         $page = $this->page;
