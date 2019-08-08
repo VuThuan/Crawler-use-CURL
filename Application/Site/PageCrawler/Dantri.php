@@ -1,5 +1,5 @@
 <?php
-class Dantri implements InterfaceGetData
+class Dantri extends MatchesData implements InterfaceGetData
 {
     private $html;
 
@@ -16,15 +16,15 @@ class Dantri implements InterfaceGetData
 
     public function getImage()
     {
-        return matchesImage("/<meta name=\"twitter:image\" content=\"(.*?)\"(\/)?>/", $this->html);
+        return $this->matchesImage("/<meta name=\"twitter:image\" content=\"(.*?)\"(\/)?>/", $this->html);
     }
 
     function getDate()
     {
-        return matchesDate("/<span class=\"fr fon7 mr2 tt-capitalize\">(\n|\r)\s+(.*?)(\n|\r)\s+<\/span>/", 0, $this->html);
+        return $this->matchesDate("/<span class=\"fr fon7 mr2 tt-capitalize\">(\n|\r)\s+(.*?)(\n|\r)\s+<\/span>/", 0, $this->html);
     }
     function getContent()
     {
-        return matchesContent("/<div id=\"divNewsContent\" class=\"fon34 mt3 mr2 fon43 detail-content\">(.*?)<div id=\"div_tamlongnhanai\"><\/div>/s", "/<p>(.*?)<\/p>/s", $this->html);
+        return $this->matchesContent("/<div id=\"divNewsContent\" class=\"fon34 mt3 mr2 fon43 detail-content\">(.*?)<div id=\"div_tamlongnhanai\"><\/div>/s", "/<p>(.*?)<\/p>/s", $this->html);
     }
 }

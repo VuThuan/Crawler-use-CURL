@@ -1,6 +1,6 @@
 <?php
 
-class Vnexpress implements InterfaceGetData
+class Vnexpress extends MatchesData implements InterfaceGetData
 {
     private $html;
 
@@ -16,7 +16,7 @@ class Vnexpress implements InterfaceGetData
     }
     public function getDate()
     {
-        return matchesDate("/<span+\s+class=\"time\sleft\">(.*?)<\/span>/", 1, $this->html);
+        return $this->matchesDate("/<span+\s+class=\"time\sleft\">(.*?)<\/span>/", 1, $this->html);
     }
     public function getContent()
     {
@@ -30,6 +30,6 @@ class Vnexpress implements InterfaceGetData
 
     public function getImage()
     {
-        return matchesImage("/<meta name=\"twitter:image\" content=\"(.*?)\"(\/)?>/", $this->html);
+        return $this->matchesImage("/<meta name=\"twitter:image\" content=\"(.*?)\"(\/)?>/", $this->html);
     }
 }
