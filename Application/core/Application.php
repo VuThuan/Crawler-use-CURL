@@ -4,10 +4,11 @@ class Application
     public function __construct()
     {
         require_once APP . "/lib/Database.php";
-        require_once APP . "/core/Curl.php";
-        require_once APP . "/core/Crawler.php";
-        require_once "./Application/Site/InterfaceGetData.php";
-        require_once "./Application/Site/PagesFactory.php";
+        require_once APP . "/lib/Curl.php";
+        require_once APP . "/lib/Crawler.php";
+        require_once APP . "/Site/InterfaceGetData.php";
+        require_once APP . "/Site/PagesFactory.php";
+        require_once APP . "/core/FactoryMethodCrawler.php";
 
         //Show Index
         require_once APP . "/Controllers/HomeController.php";
