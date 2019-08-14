@@ -1,5 +1,7 @@
 <?php
 
+namespace lib;
+
 class Curl
 {
     function httpRequest($url)

@@ -1,5 +1,7 @@
 <?php
 
+namespace lib;
+
 class Crawler
 {
     private $curl;
@@ -14,6 +16,7 @@ class Crawler
     //We parse the URL and download if the status is 200, then we set the value and get the data, insert to database
     function parsePage($url)
     {
+        $url = trim($url);
         $mysql_conn = $this->database->mysqlConnect();
 
         $url_components = parse_url($url);

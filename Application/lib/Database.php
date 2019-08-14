@@ -1,5 +1,7 @@
 <?php
 
+namespace lib;
+
 class Database
 {
     private $mysql_host;

@@ -25,11 +25,14 @@ class Application
             if (empty($urlPages)) {
                 die("Error: Please Enter the Website URL<br> ");
             }
-            $mysql_conn = new Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+            if (!filter_var($urlPages, FILTER_VALIDATE_URL)) {
+                die("Url not fount");
+            }
+            $mysql_conn = new lib\Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             if (!$mysql_conn->isConnectDatabase()) return;
 
-            $curl = new Curl();
-            $crawler = new Crawler($curl, $mysql_conn);
+            $curl = new lib\Curl();
+            $crawler = new lib\Crawler($curl, $mysql_conn);
             $dataParse = $crawler->parsePage($urlPages);
 
             $factory = new PagesFactory();
