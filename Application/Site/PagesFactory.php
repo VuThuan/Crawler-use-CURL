@@ -1,15 +1,17 @@
 <?php
 
+namespace Site;
+
+use Site\PageCrawler\Dantri;
+use Site\PageCrawler\Vietnamnet;
+use Site\PageCrawler\Vnexpress;
+
 class PagesFactory
 {
     public $html;
 
     function makeWebsite(string $param)
     {
-        require APP . "/Site/PageCrawler/Vnexpress.php";
-        require APP . "/Site/PageCrawler/Vietnamnet.php";
-        require APP . "/Site/PageCrawler/Dantri.php";
-
         switch (strtolower($param)) {
             case 'vnexpress':
                 return new Vnexpress($this->html);

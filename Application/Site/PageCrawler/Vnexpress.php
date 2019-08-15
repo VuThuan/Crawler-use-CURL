@@ -1,5 +1,10 @@
 <?php
 
+namespace Site\PageCrawler;
+
+use Site\Functions\MatchesData;
+use Site\InterfaceGetData;
+
 class Vnexpress extends MatchesData implements InterfaceGetData
 {
     private $html;

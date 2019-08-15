@@ -1,5 +1,6 @@
 <?php
-require_once APP . "/Site/Functions/MatchesData.php";
+
+namespace Site;
 
 interface InterfaceGetData
 {

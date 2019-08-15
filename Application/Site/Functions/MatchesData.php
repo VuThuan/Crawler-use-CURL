@@ -1,5 +1,7 @@
 <?php
 
+namespace Site\Functions;
+
 class MatchesData
 {
     function matchesImage($regex, $contentHTML)

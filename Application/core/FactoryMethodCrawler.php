@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 class FactoryMethodCrawler
 {
     private $dataPage;

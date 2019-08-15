@@ -1,6 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use lib\Crawler;
+use lib\Curl;
+use lib\Database;
 
 class CrawlerTest extends TestCase
 {
@@ -10,9 +13,9 @@ class CrawlerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->curl = new lib\Curl;
-        $this->database = new lib\Database('localhost', 'root', '', 'phpCrawler');
-        $this->crawler = new lib\Crawler($this->curl, $this->database);
+        $this->curl = new Curl;
+        $this->database = new Database('localhost', 'root', '', 'phpCrawler');
+        $this->crawler = new Crawler($this->curl, $this->database);
     }
 
     public function urlProvider()

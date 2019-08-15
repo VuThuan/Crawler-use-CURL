@@ -1,4 +1,10 @@
 <?php
+
+namespace Site\PageCrawler;
+
+use Site\Functions\MatchesData;
+use Site\InterfaceGetData;
+
 class Dantri extends MatchesData implements InterfaceGetData
 {
     private $html;

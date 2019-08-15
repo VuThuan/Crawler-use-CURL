@@ -1,17 +1,18 @@
 <?php
+
+use lib\Crawler;
+use lib\Curl;
+use lib\Database;
+use Controllers\HomeController;
+use core\FactoryMethodCrawler;
+use Site\InterfaceGetData;
+use Site\PagesFactory;
+
 class Application
 {
     public function __construct()
     {
-        require_once APP . "/lib/Database.php";
-        require_once APP . "/lib/Curl.php";
-        require_once APP . "/lib/Crawler.php";
-        require_once APP . "/Site/InterfaceGetData.php";
-        require_once APP . "/Site/PagesFactory.php";
-        require_once APP . "/core/FactoryMethodCrawler.php";
-
         //Show Index
-        require_once APP . "/Controllers/HomeController.php";
         $page = new HomeController();
         $page->index();
 
@@ -28,11 +29,11 @@ class Application
             if (!filter_var($urlPages, FILTER_VALIDATE_URL)) {
                 die("Url not fount");
             }
-            $mysql_conn = new lib\Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+            $mysql_conn = new Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             if (!$mysql_conn->isConnectDatabase()) return;
 
-            $curl = new lib\Curl();
-            $crawler = new lib\Crawler($curl, $mysql_conn);
+            $curl = new Curl();
+            $crawler = new Crawler($curl, $mysql_conn);
             $dataParse = $crawler->parsePage($urlPages);
 
             $factory = new PagesFactory();
