@@ -1,5 +1,7 @@
 <?php
 
+namespace core;
+
 use lib\Crawler;
 use lib\Curl;
 use lib\Database;
