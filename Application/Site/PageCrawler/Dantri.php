@@ -22,12 +22,12 @@ class Dantri extends MatchesData implements InterfaceGetData
 
     public function getImage()
     {
-        return $this->matchesImage("/<meta name=\"twitter:image\" content=\"(.*?)\"(\/)?>/", $this->html);
+        return $this->matchesImage("/<meta name=\"twitter:image\" content=\"(.*?)\"+\s?+(\/)?>/", $this->html);
     }
 
     function getDate()
     {
-        return $this->matchesDate("/<span class=\"fr fon7 mr2 tt-capitalize\">(\n|\r)\s+(.*?)(\n|\r)\s+<\/span>/", 0, $this->html);
+        return $this->matchesDate("/<span class=\"fr fon7 mr2 tt-capitalize\">(\n|\r)?\s+(.*?)(\n|\r)?\s+<\/span>/", 2, $this->html);
     }
     function getContent()
     {

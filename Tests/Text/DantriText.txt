@@ -1,0 +1,4 @@
+<title>Xin chao moi nguoi</title>
+<meta name="twitter:image" content="dantri.jpg" />
+
+<span class="fr fon7 mr2 tt-capitalize"> 18/3/3333 </span>

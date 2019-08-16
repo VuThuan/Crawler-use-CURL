@@ -23,6 +23,7 @@ class FactoryMethodCrawler
         foreach ($keyPage as $param) {
             if (preg_match("/$param/", $dataPage['host'])) {
                 $this->getDataForWebsite($dataPage, $page, $param);
+                return true;
             }
         }
     }

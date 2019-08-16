@@ -22,7 +22,7 @@ class Vietnamnet extends MatchesData implements InterfaceGetData
 
     public function getDate()
     {
-        return $this->matchesDate("/<p class=\"time-zone\">(.*?)+(\n|\r)\s+<\/p>/", 0, $this->html);
+        return $this->matchesDate("/<p class=\"time-zone\">(.*?)+(\n|\r)?\s+<\/p>/", 0, $this->html);
     }
     public function getImage()
     {

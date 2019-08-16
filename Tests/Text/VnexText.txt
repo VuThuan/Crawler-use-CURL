@@ -1,0 +1,4 @@
+<title>Xin chao moi nguoi</title>
+<meta name="twitter:image" content="vnexpress.jpg"/>
+<p class="Normal">Hello</p>
+<span class="time left">15/8/2019</span>
