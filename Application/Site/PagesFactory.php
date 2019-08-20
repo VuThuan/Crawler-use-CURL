@@ -2,6 +2,7 @@
 
 namespace Site;
 
+use Site\Functions\MatchesData;
 use Site\PageCrawler\Dantri;
 use Site\PageCrawler\Vietnamnet;
 use Site\PageCrawler\Vnexpress;
