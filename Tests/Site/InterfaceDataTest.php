@@ -28,15 +28,15 @@ class InterfaceDataTest extends TestCase
             "dantri" => [new Dantri(file_get_contents('Tests/Text/DantriText.txt'))]
         ];
     }
-
     /**
      * @dataProvider vnexpressProvider
      */
     public function testDataVnexpressIsReturned($page)
     {
+
         $this->assertEquals("Xin chao moi nguoi", $page->getTitle());
 
-        $this->assertEquals('<p class="Normal">Hello</p>', $page->getContent());
+        $this->assertEquals('Hello', $page->getContent());
 
         $this->assertEquals("15/8/2019", $page->getDate());
 
