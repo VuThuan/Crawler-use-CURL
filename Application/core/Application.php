@@ -7,7 +7,6 @@ use lib\Curl;
 use lib\Database;
 use Controllers\HomeController;
 use core\FactoryMethodCrawler;
-use Site\InterfaceGetData;
 use Site\PagesFactory;
 
 class Application

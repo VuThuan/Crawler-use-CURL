@@ -2,11 +2,13 @@
 
 namespace core;
 
+use Site\PagesFactory;
+
 class FactoryMethodCrawler
 {
     private $dataPage;
 
-    public function __construct($dataPage, $page)
+    public function __construct($dataPage, PagesFactory $page)
     {
         $this->dataPage = $dataPage;
         $this->page = $page;
@@ -14,15 +16,13 @@ class FactoryMethodCrawler
 
     function getFactory()
     {
-        $dataPage = $this->dataPage;
-        $page = $this->page;
         $keyPage = array(
             'vnexpress', 'vietnamnet', 'dantri'
         );
 
         foreach ($keyPage as $param) {
-            if (preg_match("/$param/", $dataPage['host'])) {
-                $this->getDataForWebsite($dataPage, $page, $param);
+            if (preg_match("/$param/", $this->dataPage['host'])) {
+                $this->getDataForWebsite($this->dataPage, $this->page, $param);
                 return true;
             }
         }

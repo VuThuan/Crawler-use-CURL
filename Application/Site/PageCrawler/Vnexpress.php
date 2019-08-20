@@ -7,7 +7,7 @@ use Site\InterfaceGetData;
 
 class Vnexpress extends MatchesData implements InterfaceGetData
 {
-    private $html;
+    protected $html;
 
     public function __construct($html)
     {
@@ -28,7 +28,7 @@ class Vnexpress extends MatchesData implements InterfaceGetData
         preg_match_all("/<p class=\"Normal\">\n?(.*?)<\/p>/", $this->html, $content, PREG_SET_ORDER, 0);
         $output = '';
         foreach ($content as $para) {
-            $output = $output . $para[0];
+            $output .= $para[1];
         }
         return $output;
     }
