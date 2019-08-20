@@ -24,7 +24,7 @@ class MatchesData
 
         $output = '';
         foreach ($content as $para) {
-            $output .= $para[0];
+            $output .= $para[1];
         }
         return $output;
     }
