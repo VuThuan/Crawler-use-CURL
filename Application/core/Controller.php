@@ -4,6 +4,8 @@ namespace core;
 
 use model\Model;
 
+require_once "./Application/config/config.php";
+
 class Controller
 {
     /**
@@ -22,9 +24,14 @@ class Controller
         $this->loadModel();
     }
 
-    public function openDatabaseConnection()
+    private function openDatabaseConnection()
     {
         $this->db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if (!$this->db) {
+            die("Error: Cannot connect to the database");
+        } else {
+            mysqli_set_charset($this->db, 'utf8');
+        }
     }
 
     public function loadModel()

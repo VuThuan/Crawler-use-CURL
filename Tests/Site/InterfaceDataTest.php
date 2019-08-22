@@ -11,7 +11,7 @@ class InterfaceDataTest extends TestCase
     public function vnexpressProvider()
     {
         return [
-            "Vnexpress" => [new Vnexpress(file_get_contents('Tests/Text/VnexText.txt'))],
+            "Vnexpress" => [new Vnexpress(file_get_contents('Tests/Text/VnexpressText.txt'))],
         ];
     }
 
