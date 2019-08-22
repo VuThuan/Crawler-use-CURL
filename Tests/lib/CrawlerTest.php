@@ -14,8 +14,7 @@ class CrawlerTest extends TestCase
     public function setUp(): void
     {
         $this->curl = new Curl;
-        $this->database = new Database('localhost', 'root', '', 'phpCrawler');
-        $this->crawler = new Crawler($this->curl, $this->database);
+        $this->crawler = new Crawler($this->curl);
     }
 
     public function urlProvider()

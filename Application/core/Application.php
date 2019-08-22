@@ -4,9 +4,8 @@ namespace core;
 
 use lib\Crawler;
 use lib\Curl;
-use lib\Database;
 use Controllers\HomeController;
-use core\FactoryMethodCrawler;
+use Controllers\FactoryController;
 use Site\PagesFactory;
 
 class Application
@@ -30,17 +29,16 @@ class Application
             if (!filter_var($urlPages, FILTER_VALIDATE_URL)) {
                 die("Url not fount");
             }
-            $mysql_conn = new Database(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-            if (!$mysql_conn->isConnectDatabase()) return;
 
             $curl = new Curl();
-            $crawler = new Crawler($curl, $mysql_conn);
+            $crawler = new Crawler($curl);
             $dataParse = $crawler->parsePage($urlPages);
 
             $factory = new PagesFactory();
-            $factoryCrawler = new FactoryMethodCrawler($dataParse, $factory);
+            $factoryController = new FactoryController();
 
-            $factoryCrawler->getFactory();
+            $data = $factoryController->getFactory($dataParse, $factory);
+            $factoryController->addToTheDatabase($data);
         }
     }
 }
