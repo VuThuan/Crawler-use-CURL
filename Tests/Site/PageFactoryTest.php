@@ -5,20 +5,24 @@ use Site\PagesFactory;
 
 class PageFactoryTest extends TestCase
 {
-    public function testFactoryHasReturnsObject()
+    public function webProvider()
     {
-        $page = $this->getMockBuilder(PagesFactory::class)
-            ->setMethods(['makeWebsite'])
-            ->getMock();
+        return [
+            ['vnexpress'],
+            ['dantri'],
+            ['vietnamnet']
+        ];
+    }
 
-        $page->method('makeWebsite')
-            ->withConsecutive(
-                [$this->equalTo('vnexpress')],
-                [$this->equalTo('vietnamnet')],
-                [$this->equalTo('dantri')]
-            )
-            ->will($this->returnSelf());
+    /**
+     * @dataProvider webProvider
+     */
+    public function testFactoryHasReturnsObject($web)
+    {
+        $page = new PagesFactory;
 
-        $this->assertIsObject($page->makeWebsite('vnexpress'));
+        $this->assertIsObject($page->makeWebsite($web));
+
+        $this->assertNull($page->makeWebsite('sdasds'));
     }
 }

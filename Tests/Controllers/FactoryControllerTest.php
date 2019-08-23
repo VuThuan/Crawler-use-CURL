@@ -1,6 +1,7 @@
 <?php
 
 use Controllers\FactoryController;
+use model\Model;
 use PHPUnit\Framework\TestCase;
 use Site\PagesFactory;
 
@@ -28,7 +29,7 @@ class FactoryControllerTest extends TestCase
         $page = $this->createMock(PagesFactory::class);
 
         $mock = $this->getMockBuilder(FactoryController::class)
-            ->setMethods(['getFactory', 'addPage'])
+            ->setMethods(['getFactory', 'addToTheDatabase'])
             ->getMock();
 
         $mock->method('getFactory')->willReturn(true);
