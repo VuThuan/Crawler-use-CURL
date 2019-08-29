@@ -4,8 +4,6 @@ namespace core;
 
 use model\Model;
 
-require_once "./Application/config/config.php";
-
 class Controller
 {
     /**
